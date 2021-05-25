@@ -1,0 +1,4 @@
+generated/cmd
+generated/models
+generated/restapi/*
+!generated/restapi/configure_spiraloop.go

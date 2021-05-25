@@ -1,0 +1,45 @@
+swagger: '2.0'
+info:
+  title: spiraloop
+  version: 0.1.0
+  description: For better release observability.
+consumes:
+  - application/json
+produces:
+  - application/json
+schemes:
+  - http
+host: localhost:8080
+paths:
+  /start:
+    post:
+      description: Notify a process has started.
+      operationId: postStart
+      responses:
+        '201':
+          description: OK
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /end:
+    post:
+      description: Notify the process has done.
+      operationId: postEnd
+      responses:
+        '201':
+          description: OK
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: string
+      message:
+        type: string

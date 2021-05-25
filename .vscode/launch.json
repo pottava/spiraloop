@@ -1,0 +1,34 @@
+{
+  "configurations": [
+    {
+      "name": "Cloud Run: Run/Debug Locally",
+      "type": "cloudcode.cloudrun",
+      "request": "launch",
+      "build": {
+        "docker": {
+          "path": "api/Dockerfile"
+        }
+      },
+      "image": "spiraloop",
+      "service": {
+        "name": "spiraloop-api",
+        "containerPort": 80,
+        "env": [
+          {
+            "name": "DEBUG",
+            "value": "true"
+          }
+        ],
+        "resources": {
+          "limits": {
+            "memory": "256Mi"
+          }
+        }
+      },
+      "target": {
+        "minikube": {}
+      },
+      "watch": true
+    }
+  ]
+}

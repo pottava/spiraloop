@@ -1,0 +1,30 @@
+project_name: spiraloop
+env:
+  - GO111MODULE=on
+builds:
+  - main: cmd/spiraloop/main.go
+    binary: spiraloop-cli
+    goos:
+      - linux
+      - windows
+      - darwin
+    ldflags:
+      - -s -w
+      - -X github.com/pottava/spiraloop/cli/cmd/spiraloop.ver={{.Version}}
+      - -X github.com/pottava/spiraloop/cli/cmd/spiraloop.commit={{.ShortCommit}}
+      - -X github.com/pottava/spiraloop/cli/cmd/spiraloop.date={{.Date}}
+    env:
+      - CGO_ENABLED=0
+archives:
+  - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    replacements:
+      darwin: darwin
+      linux: linux
+      windows: windows
+      386: i386
+      amd64: x86_64
+    format_overrides:
+      - goos: windows
+        format: zip
+release:
+  prerelease: auto
